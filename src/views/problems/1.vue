@@ -167,14 +167,15 @@ export default Vue.extend({
   },
   methods: {
     check(q: string, answer: number): void {
-      let hasKey = <O>(obj: O, key: PropertyKey): key is keyof O {
-        return key in obj
-      }
+      let hasKey = <O>(obj: O, key: PropertyKey): key is keyof O => {
+        return key in obj;
+      };
       if (hasKey(ANSWERS, q)) {
         if (ANSWERS[q] === answer) {
-          this.status[q] = 'is-success'
+          this.status[q] = "is-success";
           return;
-        } this.status[q] = 'is-danger'
+        }
+        this.status[q] = "is-danger";
       }
     },
   },
