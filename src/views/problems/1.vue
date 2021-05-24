@@ -101,6 +101,31 @@
           <button class="button" @click="check('q1', q1)">Check</button>
         </div>
       </div>
+      <br />
+      <br />
+      <b-collapse :open="false" aria-id="contentIdForA11y1">
+        <template #trigger>
+          <b-button
+            label="View Answer"
+            type="is-primary"
+            aria-controls="contentIdForA11y1"
+          />
+        </template>
+        <div class="notification">
+          <div class="content">
+            <p>
+              If events A and P are independent, then P(A ∩ B) = P(A) * P(B).
+              Therefore, if we know that events "Jerry beats me at Tic-Tac-Toe"
+              and "Jerry wins a game of Minesweeper" are independent, then
+              <br />
+              P(Tic-Tac-Toe ∩ Minesweeper) = P(Tic-Tac-Toe) * P(Minesweeper) =
+              0.6 * 0.875 = <strong>0.525</strong>
+            </p>
+          </div>
+        </div>
+      </b-collapse>
+      <br />
+      <br />
       <div class="columns">
         <div class="column">
           <p>
@@ -119,6 +144,35 @@
           <button class="button" @click="check('q2', q2)">Check</button>
         </div>
       </div>
+      <br />
+      <br />
+      <b-collapse :open="false" aria-id="contentIdForA11y1">
+        <template #trigger>
+          <b-button
+            label="View Answer"
+            type="is-primary"
+            aria-controls="contentIdForA11y1"
+          />
+        </template>
+        <div class="notification">
+          <div class="content">
+            <p>
+              The probability that Jerry loses a game of Minesweeper can be
+              found by the complement of its respective probability, so
+              P(Minesweeper<sup>C</sup>) = 1 - 0.875 = 0.125 <br />
+              This is also applied to Tic-Tac-Toe: P(Tic-Tac-Toe<sup>C</sup>) =
+              1 - 0.6 = 0.40 <br />
+              Therefore, knowing that the 2 events are independent, we can find
+              the probability of the intersection of the events as
+              P(Tic-Tac-Toe<sup>C</sup> ∩ Minesweeper<sup>C</sup>) =
+              P(Tic-Tac-Toe<sup>C</sup>) * P(Minesweeper<sup>C</sup>) = 0.875 *
+              0.40 = <strong>0.35</strong>
+            </p>
+          </div>
+        </div>
+      </b-collapse>
+      <br />
+      <br />
       <div class="columns">
         <div class="column">
           <p>
@@ -137,16 +191,41 @@
           <button class="button" @click="check('q3', q3, this)">Check</button>
         </div>
       </div>
+      <br />
+      <br />
+      <b-collapse :open="false" aria-id="contentIdForA11y1">
+        <template #trigger>
+          <b-button
+            label="View Answer"
+            type="is-primary"
+            aria-controls="contentIdForA11y1"
+          />
+        </template>
+        <div class="notification">
+          <div class="content">
+            <p>
+              The probability of the union of 2 events can be found by
+              subtraction the union of the 2 events from the sum of the 2
+              probabilities. <br />
+              P(Tic-Tac-Toe u Minesweeper) = P(Tic-Tac-Toe) + P(Minesweeper) -
+              P(Minesweeper ∩ Tic-Tac-Toe) = 0.825 + 0.6 - 0.525 =
+              <strong>0.95</strong>
+            </p>
+          </div>
+        </div>
+      </b-collapse>
+      <br />
+      <br />
     </div>
   </div>
 </template>
-<script lang="ts"></script>
 <script lang="ts">
 const ANSWERS = {
   q1: 0.525,
-  q2: 0.95,
-  q3: 0.05,
+  q2: 0.05,
+  q3: 0.95,
 };
+import { HAS_KEY } from "@/constants";
 import Vue from "vue";
 export default Vue.extend({
   name: "one",
@@ -167,15 +246,12 @@ export default Vue.extend({
   },
   methods: {
     check(q: string, answer: number): void {
-      let hasKey = <O>(obj: O, key: PropertyKey): key is keyof O => {
-        return key in obj;
-      };
-      if (hasKey(ANSWERS, q)) {
-        if (ANSWERS[q] === answer) {
+      if (HAS_KEY(ANSWERS, q)) {
+        if (ANSWERS[q] == answer) {
           this.status[q] = "is-success";
-          return;
+        } else {
+          this.status[q] = "is-danger";
         }
-        this.status[q] = "is-danger";
       }
     },
   },
@@ -189,7 +265,7 @@ export default Vue.extend({
 .q1,
 .q2,
 .q3 {
-  float: right;
+  float: left;
 }
 .questions p {
   font-size: 1em;
