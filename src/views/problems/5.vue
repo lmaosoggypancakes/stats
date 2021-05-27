@@ -277,8 +277,8 @@
 const ANSWERS = {
   q1: 1.66,
   q2: 0.0384,
-  q3: 0.138,
-  q4: 0.555,
+  q3: 0.687,
+  q4: 31.2,
 };
 import { HAS_KEY } from "@/constants";
 import Vue from "vue";
