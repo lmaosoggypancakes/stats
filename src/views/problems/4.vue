@@ -1,12 +1,12 @@
 <template>
   <div id="main">
     <hr />
-    <h1 class="title">A Day at the Golf Course</h1>
+    <h1 class="title">Josef watches TV</h1>
     <hr />
     <div class="columns">
       <div class="column is-one-quarter">
         <img
-          src="@/assets/range.jpg"
+          src="@/assets/tv.png"
           height="200"
           width="200"
           style="float: left"
@@ -14,63 +14,26 @@
       </div>
       <div class="column">
         <p class="hello-jerry">
-          Josef isn't a very good golfer. However, his brother Mikeal is a bit
-          cocky and claims that he can score more holes under par than Josef.
-          <br />
-          To test that, Josef and Mikeal played 36 golf holes at the local golf
-          course.
+          Josef likes to watch TV. Maybe too much for his own good. He's the
+          kind of guy to sit down and finish a whole season in one day. Let J be
+          a discrete random variable that Josef watches at least 3 episodes each
+          day for a week. A table is shown below.
         </p>
       </div>
     </div>
     <br />
-    <hr />
-    <br />
-    <div class="columns">
-      <div class="column">
-        <p class="p1">
-          They recorded the result of each hole as either "Under Par", "Par",
-          and "Over Par". After the 36 holes, the data were collected and
-          organized into a table as shown below.
-        </p>
-      </div>
-      <div class="column is-one-quarter">
-        <img
-          src="@/assets/putt.jpg"
-          height="400"
-          width="400"
-          style="float: left"
-        />
-      </div>
-    </div>
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-    <div>
-      <b-table :data="data" :columns="columns"></b-table>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="round">
-      <p>
-        For the following questions, leave all answers to the nearest 100th.<br />
-        Example: <strong>0.522</strong>
-        <br />
-        Be sure to include the beginning 0! .522 or .52 will not be counted as a
-        correct answer!
-      </p>
-    </div>
+    <b-table :data="dataj" :columns="columns"></b-table>
     <div class="questions">
       <div class="columns">
         <div class="column">
           <p>
-            Of all the holes completed, what is the probability that a randomly
-            selected hole was played by Josef?
+            What is the expected number of days per week what Josef watches at
+            least 3 shows of a TV series in one day?
           </p>
           <br />
-          <p class="q1">P(Josef) =</p>
+          <p class="q1">
+            <strong>&mu;<sub>J</sub> = </strong>
+          </p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q1">
@@ -82,7 +45,6 @@
         </div>
       </div>
       <br />
-      <br />
       <b-collapse :open="false" aria-id="contentIdForA11y1">
         <template #trigger>
           <b-button
@@ -94,24 +56,26 @@
         <div class="notification">
           <div class="content">
             <p>
-              Because we are taking the probability out of all holes that were
-              played, we can divide the total amount of holes that Josef played
-              by dividing the grand total: <br />
-              36 / 72 = <strong>0.500</strong>
+              The formula of the mean of a discrete random variable is
+              <strong>∑x<sub>i</sub> * p(x<sub>i</sub>).</strong><br />
+              We can apply this formula to the table by multiplying each count
+              by their respective probabilies, and take the sum!<br />
+              <strong>&mu;<sub>J</sub> = </strong> 0(0.01) + 1(0.03) + ... +
+              7(0.02) = <strong>3.93</strong>
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
       <div class="columns">
         <div class="column">
           <p>
-            What is the probability that a hole that resulted in "Under Par" was
-            played by Mikeal?
+            What is the standard deviation of the number of days per week that
+            Josef watches at least 3 TV episodes?
           </p>
           <br />
-          <p class="q2">P(Mikeal | Under Par) =</p>
+          <p class="q2">
+            <strong>&sigma;<sub>J</sub> = </strong>
+          </p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q2">
@@ -119,7 +83,7 @@
           </b-field>
         </div>
         <div class="column is-one-fifth">
-          <button class="button" @click="check('q2', q2)">Check</button>
+          <button class="button" @click="check('q2', q2, this)">Check</button>
         </div>
       </div>
       <br />
@@ -135,27 +99,76 @@
         <div class="notification">
           <div class="content">
             <p>
-              Using a two-way table, we can easily find the joint probability of
-              an event given another event. <br />
-              Therefore, we need to divide the number of holes that Mikeal
-              played <strong>and</strong> resulted in "Under Par" by the total
-              number of holes that resulted in Under Par.<br />
-              Therefore: P(Mikeal | Under Par) = (Mikeal ∩ Under Par) / (Under
-              Par) = 4 / 9 = <strong>0.44444</strong>
+              The formula for the standard deviation of a random variable X is
+              &#8730;∑(x<sub>i</sub> - &mu;<sub>x</sub>)<sup>2</sup>p<sub
+                >i</sub
+              >
+              Therefore, we can subtract each X value from the mean, take the
+              square, and multiply the resuly by its corresponding probability:
+              &sigma;<sub>J</sub> = &#8730;(0 - 3.93)<sup>2</sup>(0.01) + ... +
+              (7 - 3.93)<sup>2</sup>(0.02) = <strong>1.88</strong>
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
+    </div>
+    <hr />
+    <br />
+    <div class="columns">
+      <div class="column">
+        <p class="p1">
+          However, Mikeal (Josef's twin brother) isn't a huge fan of TV and
+          would rather do other things that aren't as cool. Let M by the
+          discrete random variable representing the probability distribution of
+          Mikeal watching at least 1 episode per day for a week. The mean number
+          of days per week that he watches at least 1 TV show per day is
+          &mu;<sub>M</sub> = 1.24 with a standard deviation &sigma;<sub>M</sub>
+          = 0.32.
+        </p>
+      </div>
+      <div class="column is-one-quarter">
+        <img
+          src="@/assets/tv1.jpg"
+          height="400"
+          width="400"
+          style="float: left"
+        />
+      </div>
+    </div>
+    <div class="indep">
+      <p>
+        What do we need to assume in order to calculate the differences or sum
+        of these random variables?
+      </p>
       <div class="columns">
         <div class="column">
-          <p>
-            Of the holes Josef played, what is the probability that a randomly
-            selected hole resulted in a Par?
-          </p>
+          <button class="button" onclick="this.className = 'button is-success'">
+            Independence
+          </button>
+          <button class="button" onclick="this.className = 'button is-danger'">
+            Increase Sample Size
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="round">
+      <p>
+        We can find the difference of the two means by simply subtracting the
+        latter from the former. In this case, &mu;<sub>J - M</sub> = 3.93 - 1.24
+        = <strong>2.69</strong>. Also, it's possible to calculate the sum of the
+        standard deviation of these 2 variables by taking the square root of the
+        sum of their variances. In this case, &sigma;<sub>J + M</sub> =
+        &#8730;(&sigma;<sub>J</sub><sup>2</sup> + &sigma;<sub>M</sub
+        ><sup>2</sup>) = <strong>1.907</strong>. Remember,
+        <i>variances always add!</i>
+      </p>
+    </div>
+    <div class="questions">
+      <div class="columns">
+        <div class="column">
+          <p>What is the sum of the two means?</p>
           <br />
-          <p class="q2">P(Par | Josef) =</p>
+          <p class="q3">&mu;<sub>J + M</sub> =</p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q3">
@@ -163,7 +176,7 @@
           </b-field>
         </div>
         <div class="column is-one-fifth">
-          <button class="button" @click="check('q3', q3, this)">Check</button>
+          <button class="button" @click="check('q3', q3)">Check</button>
         </div>
       </div>
       <br />
@@ -179,10 +192,9 @@
         <div class="notification">
           <div class="content">
             <p>
-              We can find the joint probability by dividing the amount of holes
-              that were from Josef <strong>and</strong> resulted in Par by the
-              total number of holes played by Josef.<br />
-              P(Par | Josef) = 5 / 36 = <strong>0.138</strong>
+              All we need to do here is take the sum of the 2 means.<br />
+              &mu;<sub>J + M</sub> = &mu;<sub>J</sub> + &mu;<sub>M</sub> = 1.24
+              + 3.93 = <strong>5.17</strong>
             </p>
           </div>
         </div>
@@ -192,11 +204,11 @@
       <div class="columns">
         <div class="column">
           <p>
-            What is the probability that a hole played by Mikeal did
-            <strong>not </strong>result in "Over Par"?
+            What is the standard deviation of the differce in days per week that
+            Josef and Mikeal watch TV?
           </p>
           <br />
-          <p class="q2">P(Over Par<sup>C</sup> | Mikeal) =</p>
+          <p class="q4">&sigma;<sub>J - M</sub> =</p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q4">
@@ -220,27 +232,24 @@
         <div class="notification">
           <div class="content">
             <p>
-              We can take the complement of "Over Par" by adding the counts of
-              "Par" and "Under Par" played by Mikeal, which equals 16 + 4 =
-              20.<br />
-              Now, we can divide this number over the total number of holes
-              Mikeal played, which is 36. Therefore, P(Over Par<sup>C</sup> |
-              Mikeal) = <strong>0.555</strong>
+              Remember that variances always add, even if we want to subtract
+              the two random variables! This means that<br />
+              &sigma;<sub>J - M</sub> = &#8730;(&sigma;<sub>J</sub
+              ><sup>2</sup> + &sigma;<sub>M</sub><sup>2</sup>) =
+              <strong>1.90</strong>.
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
     </div>
   </div>
 </template>
 <script lang="ts">
 const ANSWERS = {
-  q1: 0.5,
-  q2: 0.444,
-  q3: 0.138,
-  q4: 0.555,
+  q1: 3.93,
+  q2: 1.88,
+  q3: 5.17,
+  q4: 1.9,
 };
 import { HAS_KEY } from "@/constants";
 import Vue from "vue";
@@ -258,42 +267,66 @@ export default Vue.extend({
         q3: "",
         q4: "",
       },
-      data: [
+      dataj: [
         {
-          name: "Josef",
-          under: 17,
-          over: 14,
-          par: 5,
-          total: 36,
+          0: 0.01,
+          1: 0.03,
+          2: 0.15,
+          3: 0.11,
+          4: 0.35,
+          5: 0.25,
+          6: 0.08,
+          7: 0.02,
         },
+      ],
+      datam: [
         {
-          name: "Mikeal",
-          under: 16,
-          over: 16,
-          par: 4,
-          total: 36,
+          0: 0.35,
+          1: 0.3,
+          2: 0.2,
+          3: 0.11,
+          4: 0.35,
+          5: 0.25,
+          6: 0.08,
+          7: 0.02,
         },
       ],
       columns: [
         {
-          field: "name",
-          label: "Name",
+          field: "",
+          label: "X",
         },
         {
-          field: "under",
-          label: "Under Par",
+          field: "0",
+          label: "0",
         },
         {
-          field: "par",
-          label: "Par",
+          field: "1",
+          label: "1",
         },
         {
-          field: "over",
-          label: "Over Par",
+          field: "2",
+          label: "2",
         },
         {
-          field: "total",
-          label: "Total",
+          field: "3",
+          label: "3",
+        },
+        {
+          field: "4",
+          label: "4",
+        },
+        {
+          field: "5",
+          label: "5",
+        },
+        {
+          field: "6",
+          label: "6",
+        },
+        {
+          field: "7",
+          label: "7",
         },
       ],
     };
@@ -324,6 +357,9 @@ export default Vue.extend({
 .q3 {
   float: left;
 }
+.questions > div {
+  margin-bottom: 3em;
+}
 .questions p {
   font-size: 1em;
   text-align: left;
@@ -344,5 +380,12 @@ p {
 }
 .round {
   margin-bottom: 5em;
+}
+.indep {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+.indep button {
+  margin: 3em 1.5em 3em 1.5em;
 }
 </style>
