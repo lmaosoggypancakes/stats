@@ -6,7 +6,7 @@
     <div class="columns">
       <div class="column is-one-quarter">
         <img
-          src="@/assets/range.jpg"
+          src="@/assets/pizza.jpg"
           height="200"
           width="200"
           style="float: left"
@@ -122,7 +122,7 @@
       </div>
       <div class="column is-one-quarter">
         <img
-          src="@/assets/putt.jpg"
+          src="@/assets/costume.jpg"
           height="400"
           width="400"
           style="float: left"
