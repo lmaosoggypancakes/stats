@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <hr />
-    <h1 class="title">A Day at the Golf Course</h1>
+    <h1 class="title">Pizza!</h1>
     <hr />
     <div class="columns">
       <div class="column is-one-quarter">
@@ -14,63 +14,24 @@
       </div>
       <div class="column">
         <p class="hello-jerry">
-          Josef isn't a very good golfer. However, his brother Mikeal is a bit
-          cocky and claims that he can score more holes under par than Josef.
-          <br />
-          To test that, Josef and Mikeal played 36 golf holes at the local golf
-          course.
+          Josef likes to eat pizza. To investigate just how often Josef eats
+          pizza, statistical procedures were taken to provide an estimate of the
+          probability that on any given week, Josef eats pizza. For now, let's
+          assume that this probability is <strong>p = 0.6.</strong>
         </p>
       </div>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="columns">
-      <div class="column">
-        <p class="p1">
-          They recorded the result of each hole as either "Under Par", "Par",
-          and "Over Par". After the 36 holes, the data were collected and
-          organized into a table as shown below.
-        </p>
-      </div>
-      <div class="column is-one-quarter">
-        <img
-          src="@/assets/putt.jpg"
-          height="400"
-          width="400"
-          style="float: left"
-        />
-      </div>
-    </div>
-    <br />
-    <br />
-    <hr />
-    <br />
-    <br />
-    <div>
-      <b-table :data="data" :columns="columns"></b-table>
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="round">
-      <p>
-        For the following questions, leave all answers to the nearest 100th.<br />
-        Example: <strong>0.522</strong>
-        <br />
-        Be sure to include the beginning 0! .522 or .52 will not be counted as a
-        correct answer!
-      </p>
     </div>
     <div class="questions">
       <div class="columns">
         <div class="column">
           <p>
-            Of all the holes completed, what is the probability that a randomly
-            selected hole was played by Josef?
+            What is the expected number of weeks that would pass until Josef
+            eats a pizza?
           </p>
           <br />
-          <p class="q1">P(Josef) =</p>
+          <p class="q1">
+            <strong>&mu;<sub>X</sub> = </strong>
+          </p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q1">
@@ -82,7 +43,6 @@
         </div>
       </div>
       <br />
-      <br />
       <b-collapse :open="false" aria-id="contentIdForA11y1">
         <template #trigger>
           <b-button
@@ -94,24 +54,25 @@
         <div class="notification">
           <div class="content">
             <p>
-              Because we are taking the probability out of all holes that were
-              played, we can divide the total amount of holes that Josef played
-              by dividing the grand total: <br />
-              36 / 72 = <strong>0.500</strong>
+              We have a binomial distribution with <strong>p = 0.6</strong>. To
+              find the expected count, we use &mu;<sub>p</sub> = 1 / p.
+              Therefore, &mu;<sub>p</sub> = 1 / 0.6 =
+              <strong>1.66 weeks</strong>
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
+
       <div class="columns">
         <div class="column">
           <p>
-            What is the probability that a hole that resulted in "Under Par" was
-            played by Mikeal?
+            What is the probability that Josef eats his first pizza after 4
+            weeks?
           </p>
           <br />
-          <p class="q2">P(Mikeal | Under Par) =</p>
+          <p class="q2">
+            <strong>P(X = 4)</strong>
+          </p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q2">
@@ -119,7 +80,7 @@
           </b-field>
         </div>
         <div class="column is-one-fifth">
-          <button class="button" @click="check('q2', q2)">Check</button>
+          <button class="button" @click="check('q2', q2, this)">Check</button>
         </div>
       </div>
       <br />
@@ -135,27 +96,56 @@
         <div class="notification">
           <div class="content">
             <p>
-              Using a two-way table, we can easily find the joint probability of
-              an event given another event. <br />
-              Therefore, we need to divide the number of holes that Mikeal
-              played <strong>and</strong> resulted in "Under Par" by the total
-              number of holes that resulted in Under Par.<br />
-              Therefore: P(Mikeal | Under Par) = (Mikeal ∩ Under Par) / (Under
-              Par) = 4 / 9 = <strong>0.44444</strong>
+              To find this probability we use the formula P(X = x) = (1 -
+              p)<sup>x-1</sup>p, where x is the number of weeks and p is the
+              proportion.<br />
+              Therefore, P(X = 4) = (1 - 0.6)<sup>4-1</sup>(0.6), where p = 0.6
+              and x = 4. P(X = 4) = <strong>0.0384</strong>
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
+    </div>
+
+    <br />
+    <hr />
+    <br />
+
+    <div class="columns">
+      <div class="column">
+        <p class="p1">
+          Let's say that a local pizza place called "Jerry's Pizzeria" decides
+          to host a prize of a pizza costume for your pet dog, if you eat at
+          least 30 pizzas in one year. Josef really can't wait to see Hercules
+          walking around in a pizza costume, so he decides to sign up.
+        </p>
+      </div>
+      <div class="column is-one-quarter">
+        <img
+          src="@/assets/putt.jpg"
+          height="400"
+          width="400"
+          style="float: left"
+        />
+      </div>
+    </div>
+    <div>
+      <p>
+        It looks like we know have a binomial setting with n = 52 and p = 0.6!
+      </p>
+    </div>
+    <br />
+    <hr />
+    <div class="questions">
       <div class="columns">
         <div class="column">
           <p>
-            Of the holes Josef played, what is the probability that a randomly
-            selected hole resulted in a Par?
+            What is the probability that Josef wins the reward by eating at
+            least 30 pizzas in one year, assuming he limits himself to at most
+            one pizza a year and the fact that there are 52 weeks in a year?
           </p>
           <br />
-          <p class="q2">P(Par | Josef) =</p>
+          <p class="q3"><strong>P(X &GreaterEqual; 30) =</strong></p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q3">
@@ -163,7 +153,7 @@
           </b-field>
         </div>
         <div class="column is-one-fifth">
-          <button class="button" @click="check('q3', q3, this)">Check</button>
+          <button class="button" @click="check('q3', q3)">Check</button>
         </div>
       </div>
       <br />
@@ -179,10 +169,20 @@
         <div class="notification">
           <div class="content">
             <p>
-              We can find the joint probability by dividing the amount of holes
-              that were from Josef <strong>and</strong> resulted in Par by the
-              total number of holes played by Josef.<br />
-              P(Par | Josef) = 5 / 36 = <strong>0.138</strong>
+              In order to calculate P(X &GreaterEqual; 30), we need to take the
+              sum of P(X = n) for all values of n from 30 to 52.<br />
+              You may recall the formula for P(X = x) in a binomial setting
+              being P(X = x) = (n choose x) * p<sup>x</sup>(1 - p)<sup
+                >n - x</sup
+              >
+              In this case, n = 52 and p = 0.6. Therefore, P(X &GreaterEqual;
+              30) = (52 choose 30) * p<sup>30</sup>(1 - p)<sup>52 - 30</sup> +
+              (52 choose 31) * p<sup>31</sup>(1 - p)<sup>52 - 31</sup> + ... +
+              (52 choose 52) * p<sup>30</sup>(1 - p)<sup>52 - 52</sup> =
+              <strong>0.687</strong> This process is tedious! That's why you can
+              also use the <code>binomcdf</code> command for these purposes. In
+              this case, P(X &GreaterEqual; 30) = 1 -
+              <code>binomcdf(52, 0.6, 29)</code>
             </p>
           </div>
         </div>
@@ -192,11 +192,13 @@
       <div class="columns">
         <div class="column">
           <p>
-            What is the probability that a hole played by Mikeal did
-            <strong>not </strong>result in "Over Par"?
+            What is the expected values of pizzas eaten in a year if Josef
+            limits himself to one pizza a week with a probability of 0.6?
           </p>
           <br />
-          <p class="q2">P(Over Par<sup>C</sup> | Mikeal) =</p>
+          <p class="q4">
+            <strong>&mu;<sub>X</sub> = </strong>
+          </p>
         </div>
         <div class="column is-one-fifth">
           <b-field :type="status.q4">
@@ -220,25 +222,61 @@
         <div class="notification">
           <div class="content">
             <p>
-              We can take the complement of "Over Par" by adding the counts of
-              "Par" and "Under Par" played by Mikeal, which equals 16 + 4 =
-              20.<br />
-              Now, we can divide this number over the total number of holes
-              Mikeal played, which is 36. Therefore, P(Over Par<sup>C</sup> |
-              Mikeal) = <strong>0.555</strong>
+              We can calculate the mean (expected count) of a binomial
+              distribution by the formula &mu;<sub>X</sub> = np. Here, n = 52
+              and p = 0.6. Therefore, 52(0.6) = <strong>31.2</strong>
             </p>
           </div>
         </div>
       </b-collapse>
-      <br />
-      <br />
+      <div class="indep">
+        <p>
+          Can Josef <i>expect</i> to win the Pizza costume for Hercules this
+          year?
+        </p>
+        <div class="columns">
+          <div class="column">
+            <button
+              class="button mcq"
+              onclick="this.className = 'button is-success mcq'"
+            >
+              Yes, because the expected count (31.2) is greater than 30.
+            </button>
+          </div>
+          <div class="column">
+            <button
+              class="button mcq"
+              onclick="this.className = 'button is-danger mcq'"
+            >
+              Yes, because P(X &GreaterEqual; 30) is not statistically
+              significant
+            </button>
+          </div>
+          <div class="column">
+            <button
+              class="button mcq"
+              onclick="this.className = 'button is-danger mcq'"
+            >
+              No, because Josef needs to stop eating pizzas.
+            </button>
+          </div>
+          <div class="column">
+            <button
+              class="button mcq"
+              onclick="this.className = 'button is-danger mcq'"
+            >
+              Increase Sample Size
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script lang="ts">
 const ANSWERS = {
-  q1: 0.5,
-  q2: 0.444,
+  q1: 1.66,
+  q2: 0.0384,
   q3: 0.138,
   q4: 0.555,
 };
@@ -316,6 +354,11 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.mcq {
+  height: 5em;
+  font-size: 1em;
+  white-space: normal;
+}
 .column.is-one-fifth {
   margin-top: auto;
 }
