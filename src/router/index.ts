@@ -23,6 +23,18 @@ const routes: Array<RouteConfig> = [
         path: "2",
         component: () => import("@/views/problems/2.vue"),
       },
+      {
+        path: "3",
+        component: () => import("@/views/problems/3.vue"),
+      },
+      {
+        path: "4",
+        component: () => import("@/views/problems/4.vue"),
+      },
+      {
+        path: "5",
+        component: () => import("@/views/problems/5.vue"),
+      },
     ],
   },
 ];
