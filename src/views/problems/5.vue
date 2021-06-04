@@ -231,8 +231,7 @@
       </b-collapse>
       <div class="indep">
         <p>
-          Can Josef <i>expect</i> to win the Pizza costume for Hercules this
-          year?
+          If Josef signed up for the competition, many, many times, can he safely <i>expect</i> to win, on average?
         </p>
         <div class="columns">
           <div class="column">
